@@ -1,0 +1,10 @@
+name: datascienceproject
+title:
+username:
+account: projetdatascience
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1614842
+bundleId: 2685011
+url: https://projetdatascience.shinyapps.io/datascienceproject/
+when: 1576919503.92535
