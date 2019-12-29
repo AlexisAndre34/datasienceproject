@@ -15,6 +15,7 @@ shinyUI(navbarPage("datscienceproject",
   
   # Application title
   tabPanel("nuage de point",
+           
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
@@ -38,5 +39,22 @@ shinyUI(navbarPage("datscienceproject",
     )
   )
   ),
-  tabPanel("okok")
+  tabPanel("justine",
+           sidebarLayout(
+             sidebarPanel(
+               sliderInput("age", "slider age :", min = 18, max = 90, value = c(18,90)),
+               
+             ),
+             mainPanel(
+               plotOutput("justine")
+             )
+           )
+           
+           
+           
+           
+           
+           ),
+  tabPanel("temil"),
+  tabPanel("Matt")
 ))
