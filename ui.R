@@ -56,5 +56,30 @@ shinyUI(navbarPage("datscienceproject",
            
            ),
   tabPanel("temil"),
-  tabPanel("Matt")
+  tabPanel("Matt",
+                            sidebarLayout(
+                              sidebarPanel(
+                                checkboxGroupInput("idtypemoto", "Type de moto:",
+                                                   c("Custom" = "Custom",
+                                                     "Quad" = "Quad",
+                                                     "Roadster" = "Roadster",
+                                                     "Routiere / GT" = "Routiere / GT",
+                                                     "Scooter" = "Scooter",
+                                                     "Side-car / Trike" = "Side-car / Trike",
+                                                     "Sportive" = "Sportive",
+                                                     "Tout terrain (Trial,  Enduro, Cross)" = "Tout terrain (Trial,  Enduro, Cross)",
+                                                     "Trail / Supermotard" = "Trail / Supermotard"
+                                                   )),
+                                sliderInput("age", "slider age :", min = 18, max = 90, value = c(18,90)),
+                                
+                              ),
+                              
+                              # Show a plot of the generated distribution
+                              mainPanel(
+                                plotOutput("Matt")
+                              )
+                            )  
+                            
+                            
+                   )
 ))
