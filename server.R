@@ -78,6 +78,29 @@ shinyServer(function(input, output) {
     
     
   })
+  
+  output$Matt <- renderPlot({
+    
+    moto <- dataProject %>% dplyr::filter(dataProject$SEGMENT %in% input$idtypemoto)
+    
+    csp <- moto$`CSP`
+    status <- case_when(
+      csp == "Cadres" ~ "Cadres",
+      csp == "Employés" ~ "Employes",
+      csp == "Etudiants" | csp =="En recherche d'emploi" ~ "Etudiant & Chomeurs",
+      TRUE ~ "Autres"
+    )
+    
+    status <- cbind(status,moto$`SEGMENT`)
+    
+    df4<-data.frame(
+      status = status[,1],
+      modele = status[,2] 
+    )
+    
+    bp4<-ggplot(df4) + geom_bar(aes(x=status,y=modele,fill=modele),stat="identity") 
+    bp4
+  })
     
 
   
