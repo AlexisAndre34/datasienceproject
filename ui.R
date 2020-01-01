@@ -11,32 +11,40 @@ library(shiny)
 library(dplyr)
 
 # Define UI for application that draws a histogram
-shinyUI(fluidPage(
+shinyUI(navbarPage("datscienceproject",
   
   # Application title
-  titlePanel("Old Faithful Geyser Data"),
+  tabPanel("nuage de point",
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
     sidebarPanel(
       checkboxGroupInput("idtypemoto", "Type de moto:",
-                         c("Costum" = "Costum",
+                         c("Custom" = "Custom",
                            "Quad" = "Quad",
                            "Roadster" = "Roadster",
                            "Routière / GT" = "Routière / GT",
                            "Scooter" = "Scooter",
                            "Side-car / Trike" = "Side-car / Trike",
                            "Sportive" = "Sportive",
-                           "Tout terrain(Trial, Enduro, Cross)" = "Tout terrain(Trial, Enduro, Cross)",
+                           "Tout terrain (Trial,  Enduro, Cross)" = "Tout terrain (Trial,  Enduro, Cross)",
                            "Trail / Supermotard" = "Trail / Supermotard"
                            )),
       sliderInput("age", "slider age :", min = 18, max = 90, value = c(18,90)),
       
     ),
-    
-    # Show a plot of the generated distribution
     mainPanel(
-       plotOutput("distPlot")
+       plotOutput("alexis")
     )
   )
+  ),
+  tabPanel("justine",
+           sidebarLayout(
+             sidebarPanel(
+               sliderInput("age1", "slider age :", min = 18, max = 90, value = c(18,90)),
+             ),
+             mainPanel(
+               plotOutput("justine")
+             )
+           ))
 ))
