@@ -43,7 +43,7 @@ shinyServer(function(input, output) {
    
   })
   
-  output$justine <- renderPlot({
+  output$motoSelonAge <- renderPlot({
     observe({
       age_scale <- as.numeric(input$age)
     })

@@ -30,7 +30,7 @@ shinyUI(navbarPage("datscienceproject",
                            "Tout terrain (Trial,  Enduro, Cross)" = "Tout terrain (Trial,  Enduro, Cross)",
                            "Trail / Supermotard" = "Trail / Supermotard"
                            )),
-      sliderInput("age", "slider age :", min = 18, max = 90, value = c(18,90)),
+      sliderInput("age", "Choisir la tranche d'age :", min = 18, max = 90, value = c(18,90)),
       
     ),
     mainPanel(
@@ -38,13 +38,13 @@ shinyUI(navbarPage("datscienceproject",
     )
   )
   ),
-  tabPanel("justine",
+  tabPanel("Repartition Moto selon l'age",
            sidebarLayout(
              sidebarPanel(
-               sliderInput("age1", "slider age :", min = 18, max = 90, value = c(18,90)),
+               sliderInput("age1", "Choisir la tranche d'age :", min = 18, max = 90, value = c(18,90)),
              ),
              mainPanel(
-               plotOutput("justine")
+               plotOutput("motoSelonAge")
              )
            ))
 ))
