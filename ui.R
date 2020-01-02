@@ -39,7 +39,7 @@ shinyUI(navbarPage("datscienceproject",
   )
   ),
   tabPanel("Repartition Moto selon l'age",
-           sidebarLayout(
+           sidebarLayout(position = "left",
              sidebarPanel(
                sliderInput("age1", "Choisir la tranche d'age :", min = 18, max = 90, value = c(18,90)),
              ),

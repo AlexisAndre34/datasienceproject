@@ -79,13 +79,16 @@ shinyServer(function(input, output) {
     
     maxMoto<-max(df$NbFragment)
     barplot(df$NbFragment, names.arg=df$Fragment, ylim=c(0,(maxMoto+20)), ylab="Nombre de motos", xlab="Fragments")
-    
+    nbTotalMoto<-sum(df$NbFragment)
+    pourc<-"%"
     #GRAPHIQUE BIEN juste les legendes se chevauche
     ggplot(data=df, aes(x=Fragment, y=NbFragment,fill=Fragment)) +
       geom_bar(stat="identity") +
       geom_text(aes(label=NbFragment), vjust=1.6, color="white", size=3.5)+
+      geom_text(aes(label=paste(round(((NbFragment/nbTotalMoto)*100),1),pourc)), vjust=-0.4, color="black", size=3.5)+
       theme_minimal()+
-      ggtitle("Repartition des types de moto selon l'age des conducteurs")
+      ggtitle("Repartition des types de moto selon l'age des conducteurs")+
+      theme(plot.title = element_text(hjust = 0.5,face = "bold",size = (15)),axis.title.x = element_blank())
       
    
     
