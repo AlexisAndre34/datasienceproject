@@ -67,25 +67,27 @@ shinyServer(function(input, output) {
     
     
     #Data frame avec la frequence des moto en fonction de l'age donnee et de la moto
-    dataframefreq<-as.data.frame(table(select_tranche))
+    dataframefreq<-as.data.frame(table(select_tranche$value))
     
     
     #Renommage des colonne
     df<-dataframefreq %>% 
       rename(
         NbFragment = Freq,
-        Fragment = value
+        Fragment = Var1
       )
     
-    
-    barplot(df$NbFragment, names.arg=df$Fragment, ylim=c(0,2000), ylab="Nombre de motos", xlab="Fragments")
+    maxMoto<-max(df$NbFragment)
+    barplot(df$NbFragment, names.arg=df$Fragment, ylim=c(0,(maxMoto+20)), ylab="Nombre de motos", xlab="Fragments")
     
     #GRAPHIQUE BIEN juste les legendes se chevauche
     ggplot(data=df, aes(x=Fragment, y=NbFragment,fill=Fragment)) +
       geom_bar(stat="identity") +
       geom_text(aes(label=NbFragment), vjust=1.6, color="white", size=3.5)+
-      theme_minimal()
-    
+      theme_minimal()+
+      ggtitle("Repartition des types de moto selon l'age des conducteurs")
+      
+   
     
   })
   
