@@ -14,7 +14,7 @@ library(dplyr)
 shinyUI(navbarPage("datscienceproject",
                    
                    # Application title
-                   tabPanel("nuage de point",
+                   tabPanel("Nuage de Points",
                             
                             # Sidebar with a slider input for number of bins 
                             sidebarLayout(
@@ -47,7 +47,12 @@ shinyUI(navbarPage("datscienceproject",
                                             plotOutput("motoSelonAge")
                                           )
                             )),
-                   tabPanel("temil"),
+                   tabPanel("Résultat de l'AFC",  # Show a plot of the generated distribution
+                            mainPanel(
+                              plotOutput("temil")
+                            )),
+                   
+                   
                    tabPanel("Catégorie socio professionnelle",
                             sidebarLayout(
                               sidebarPanel(
