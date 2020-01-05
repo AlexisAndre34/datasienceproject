@@ -11,6 +11,7 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(eeptools)
+library(FactoMineR)
 
 Qualif_2019 <- read_excel("C:/Users/haasm/Downloads/Qualif 2019.xlsx")
 
@@ -121,6 +122,16 @@ shinyServer(function(input, output) {
     bp4<-ggplot(df4) + geom_bar(aes(x=status,y=modele,fill=modele),stat="identity") 
     bp4
   })
+  
+  
+  output$temil <- renderPlot({
+    tranche <- cut(ages2019, c(0, 20, 40, 60, 80, 100))
+    afc <- data.frame(segments=dataProject$SEGMENT,tranche=tranche)
+    T=xtabs(~segments+tranche,afc)
+    CA(T)
+  })
+  
+  
   
   output$Matt2 <- renderPlot({
     
