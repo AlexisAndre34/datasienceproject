@@ -32,7 +32,8 @@ shinyServer(function(input, output) {
    if (is.null(input$idtypemoto)){
      ggplot(data = dataProject, aes(x = IDENTIFIANT, y = ages2019, color = SEGMENT)) + 
        geom_point(aes(shape = SEGMENT))+
-       ylim(age_scale[1], age_scale[2])
+       ylim(age_scale[1], age_scale[2]) +
+       labs(title = "type de moto en fonction de l'indivu et de son age", x = "Identifant", y = "age")
    }
    else{
      ggplot(data = moto, aes(x = IDENTIFIANT, y = ages2019, color = SEGMENT)) + 
