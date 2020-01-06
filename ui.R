@@ -14,7 +14,7 @@ library(dplyr)
 shinyUI(navbarPage("datscienceproject",
   
   # Application title
-  tabPanel("nuage de point",
+  tabPanel("nuage de points",
   
   # Sidebar with a slider input for number of bins 
   sidebarLayout(
@@ -46,7 +46,61 @@ shinyUI(navbarPage("datscienceproject",
              mainPanel(
                plotOutput("justine")
              )
-           ))
+           )),
+  tabPanel("Résultat de l'AFC",  # Show a plot of the generated distribution
+           mainPanel(
+             plotOutput("temil")
+           )),
+  tabPanel("Catégorie socio professionnelle",
+           sidebarLayout(
+             sidebarPanel(
+               checkboxGroupInput("typemoto", "Type de moto:",
+                                  c("Custom" = "Custom",
+                                    "Quad" = "Quad",
+                                    "Roadster" = "Roadster",
+                                    "Routiere / GT" = "Routiere / GT",
+                                    "Scooter" = "Scooter",
+                                    "Side-car / Trike" = "Side-car / Trike",
+                                    "Sportive" = "Sportive",
+                                    "Tout terrain (Trial,  Enduro, Cross)" = "Tout terrain (Trial,  Enduro, Cross)",
+                                    "Trail / Supermotard" = "Trail / Supermotard"
+                                  )),
+               
+             ),
+             
+             # Show a plot of the generated distribution
+             mainPanel(
+               plotOutput("Matt")
+             )
+           )  
+           
+           
+  ),
+  tabPanel("Situation familliale",
+           sidebarLayout(
+             sidebarPanel(
+               checkboxGroupInput("typemoto2", "Type de moto:",
+                                  c("Custom" = "Custom",
+                                    "Quad" = "Quad",
+                                    "Roadster" = "Roadster",
+                                    "Routiere / GT" = "Routiere / GT",
+                                    "Scooter" = "Scooter",
+                                    "Side-car / Trike" = "Side-car / Trike",
+                                    "Sportive" = "Sportive",
+                                    "Tout terrain (Trial,  Enduro, Cross)" = "Tout terrain (Trial,  Enduro, Cross)",
+                                    "Trail / Supermotard" = "Trail / Supermotard"
+                                  )),
+               
+             ),
+             
+             # Show a plot of the generated distribution
+             mainPanel(
+               plotOutput("Matt2")
+             )
+           )  
+           
+           
+  ) 
 ))
 
 

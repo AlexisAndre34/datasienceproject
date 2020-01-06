@@ -11,6 +11,7 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 library(eeptools)
+library(FactoMineR)
 
 Segment_2019 <- read_excel("Segment-2019.xlsx")
 Qualif_2019 <- read_excel("Qualif 2019.xlsx")
@@ -24,6 +25,76 @@ dataProject <- cbind(dataProject,ages2019)
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   
+  output$temil <- renderPlot({
+    tranche <- cut(ages2019, c(0, 20, 40, 60, 80, 100))
+    afc <- data.frame(segments=dataProject$SEGMENT,tranche=tranche)
+    T=xtabs(~segments+tranche,afc)
+    CA(T)
+  })
+  
+  output$Matt2 <- renderPlot({
+    
+    if (is.null(input$typemoto2)){
+      moto <- dataProject
+    }
+    else{
+      moto <- dataProject %>% dplyr::filter(dataProject$SEGMENT %in% input$typemoto2)
+    }
+    
+    situation <- moto$`SITFAM`
+    
+    situation <- case_when(
+      situation == "En couple sans enfant"| situation =="En couple avec enfant(s)" ~ "En couple",
+      situation == "Seul(e) sans enfant"| situation =="Seul(e) avec enfants" ~ "Celibataire",
+      TRUE ~ "Autres"
+    )
+    
+    situation <- cbind(situation,moto$`SEGMENT`)
+    
+    df3<-data.frame(
+      situation = situation[,1],
+      modele = situation[,2] 
+    )
+    
+    bp3<-ggplot(df3) + geom_bar(aes(x=situation,y=modele,fill=modele),stat="identity")
+    bp3
+  })
+  
+  output$Quantiles <- renderPlot({
+    
+    if (is.null(input$typemoto3)){
+      moto <- dataProject
+      ages <- floor(age_calc(as.Date(moto$`DATE DE NAISSANCE`),Sys.Date(), units = "years"))
+    }
+    else{
+      moto <- dataProject %>% dplyr::filter(dataProject$SEGMENT %in% input$typemoto3)
+      ages <- floor(age_calc(as.Date(moto$`DATE DE NAISSANCE`),Sys.Date(), units = "years"))
+    }
+    
+    
+    ages <- case_when(
+      ages < 39  ~ "0 - 38",
+      ages > 38 & ages < 49 ~ "38 - 48",
+      ages > 48 & ages < 58 ~ "48 - 57",
+      ages > 57 ~ "57 - 95"
+    )
+    
+    
+    ageCompare <- cbind(ages,moto$`SEGMENT`)
+    
+    
+    df6<-data.frame(
+      age = ageCompare[,1],
+      modele = ageCompare[,2] 
+    )
+    
+    
+    bp6<-ggplot(df6) + geom_bar(aes(x=age,y=fct_infreq(modele),fill=modele),stat="identity")
+    bp6
+  })
+  
+  
+})
   
   
   output$alexis <- renderPlot({
@@ -90,5 +161,5 @@ shinyServer(function(input, output) {
     
   })
   
-})
+
 
